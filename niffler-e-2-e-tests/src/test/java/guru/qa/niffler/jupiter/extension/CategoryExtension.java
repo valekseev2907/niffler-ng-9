@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 import org.junit.platform.commons.support.AnnotationSupport;
 
+import static guru.qa.niffler.jupiter.extension.TestMethodContextExtension.context;
+
 public class CategoryExtension implements
     BeforeEachCallback,
     AfterTestExecutionCallback,
@@ -72,6 +74,12 @@ public class CategoryExtension implements
 
   @Override
   public CategoryJson resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-    return extensionContext.getStore(NAMESPACE).get(extensionContext.getUniqueId(), CategoryJson.class);
+    return createdCategory();
+  }
+
+  public static CategoryJson createdCategory() {
+    final ExtensionContext methodContext = context();
+    return methodContext.getStore(NAMESPACE)
+        .get(methodContext.getUniqueId(), CategoryJson.class);
   }
 }
