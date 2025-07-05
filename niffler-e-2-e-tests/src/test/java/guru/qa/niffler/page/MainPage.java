@@ -8,9 +8,11 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class MainPage {
   private final SelenideElement spendingTable = $("#spendings");
+  private final SelenideElement statisticsBlock = $("#stat");
 
   public MainPage checkThatPageLoaded() {
-    spendingTable.should(visible);
+    statisticsBlock.shouldBe(visible);
+    spendingTable.shouldBe(visible);
     return this;
   }
 
