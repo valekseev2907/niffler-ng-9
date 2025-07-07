@@ -11,9 +11,19 @@ public class LoginTest {
 
   @Test
   void mainPageShouldBeDisplayedAfterSuccessLogin() {
+    String username = "ng9";
+    String password = "12345";
     Selenide.open(CFG.frontUrl(), LoginPage.class)
-        .fillLoginPage("duck", "12345")
-        .submit()
+        .fillLoginPage(username, password)
+        .successSubmit()
         .checkThatPageLoaded();
+  }
+
+  @Test
+  void userShouldStayOnLoginPageAfterLoginWithBadCredentials() {
+    Selenide.open(CFG.frontUrl(), LoginPage.class)
+            .fillLoginPage("invalid_user", "wrong_password")
+            .submit()
+            .shouldHaveError("Неверные учетные данные пользователя");
   }
 }
