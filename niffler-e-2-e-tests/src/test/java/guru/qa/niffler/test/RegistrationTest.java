@@ -17,7 +17,7 @@ public class RegistrationTest {
         String password = faker.internet().password();
 
         Selenide.open(CFG.frontUrl(), LoginPage.class)
-                .register()
+                .clickOnRegisterButton()
                 .fillRegisterPage(username, password, password)
                 .successSubmit();
     }
@@ -27,7 +27,7 @@ public class RegistrationTest {
         String username = "ng9";
         String password = "12345";
         Selenide.open(CFG.frontUrl(), LoginPage.class)
-                .register()
+                .clickOnRegisterButton()
                 .fillRegisterPage(username, password, password)
                 .submit()
                 .shouldHaveError("Username `" + username + "` already exists");
@@ -40,7 +40,7 @@ public class RegistrationTest {
         String passwordSubmit = faker.internet().password();
 
         Selenide.open(CFG.frontUrl(), LoginPage.class)
-                .register()
+                .clickOnRegisterButton()
                 .fillRegisterPage(username, password, passwordSubmit)
                 .submit()
                 .shouldHaveError("Passwords should be equal");

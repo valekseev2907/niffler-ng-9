@@ -28,7 +28,7 @@ public class LoginPage {
     return this;
   }
 
-  public RegisterPage register() {
+  public RegisterPage clickOnRegisterButton() {
     registerButton.click();
     return new RegisterPage();
   }
